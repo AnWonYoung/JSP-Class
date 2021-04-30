@@ -17,7 +17,6 @@ public class BoardWriteServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("title"); // getParameter 값은 항상 String
 		String ctnt = request.getParameter("ctnt");
 		
@@ -25,6 +24,7 @@ public class BoardWriteServlet extends HttpServlet {
 		vo.setTitle(title);
 		vo.setCtnt(ctnt);
 		
+		BoardDAO.insertBoard(vo);
 		
 		response.sendRedirect("/list4");
 	}
