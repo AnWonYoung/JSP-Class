@@ -43,6 +43,7 @@ public class BoardDAO {
 			ps = con.prepareStatement(sql); // 메소드명
 			// 위는 필수적
 			
+			
 			rs = ps.executeQuery(); // 쿼리 실행 
 			
 			// rs.next메소드가 하는 일 두 가지
