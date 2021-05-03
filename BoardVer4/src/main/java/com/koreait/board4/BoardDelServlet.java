@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/detail4")
-public class BoardDetailServlet extends HttpServlet {
+@WebServlet("/del4")
+public class BoardDelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String iboard = request.getParameter("iboard"); // jsp에서 보낸 키 값 받아오기
+		String iboard = request.getParameter("iboard"); // del4의 키값 받아오기
+		int intIboard = Integer.parseInt(iboard);		// 정수형 변경
 		
-		int intIboard = Integer.parseInt(iboard);
-		BoardVO data = BoardDAO.selBoard(intIboard);
+		BoardVO data = new BoardVO();
+		data.setIboard(intIboard);
+		BoardDAO.delBoard(data);
 		
-		request.setAttribute("data", data);
-		
-		String view = "/WEB-INF/view/detail4.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		response.sendRedirect("/list4");
 	}
+
 
 }
