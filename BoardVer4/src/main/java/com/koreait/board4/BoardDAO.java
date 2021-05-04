@@ -74,7 +74,7 @@ public class BoardDAO {
 		
 		return list;
 	}
-	
+	// detail에 사용 타입 주의
 	public static BoardVO selBoard(int iboard) {
 		Connection con = null;
 		PreparedStatement ps = null;
