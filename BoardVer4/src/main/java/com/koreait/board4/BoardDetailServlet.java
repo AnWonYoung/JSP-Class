@@ -12,10 +12,14 @@ public class BoardDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String iboard = request.getParameter("iboard"); // jsp에서 보낸 키 값 받아오기
+//		String iboard = request.getParameter("iboard"); // jsp에서 보낸 키 값 받아오기
+//		
+//		int intIboard = Integer.parseInt(iboard);
 		
-		int intIboard = Integer.parseInt(iboard);
-		BoardVO data = BoardDAO.selBoard(intIboard);
+		int iboard = MyUtils.getParamInt(request, "iboard");
+
+		BoardVO data = BoardDAO.selBoard(iboard);
+		
 		
 		request.setAttribute("data", data);
 		

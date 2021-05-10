@@ -18,6 +18,6 @@ public class BoardListServlet extends HttpServlet {
 		 request.setAttribute("list", list);
 		
 		String view = "/WEB-INF/view/list4.jsp";
-		request.getRequestDispatcher(view).forward(request, response);
+		MyUtils.openJSP(view, request, response);
 	}
 }
