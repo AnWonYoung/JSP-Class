@@ -9,14 +9,17 @@
 <style>
 	body {
 	  margin: auto;
-	  width: 20%;
+	  width: 35%;
 	  padding: 10px;
+	  background-color: rgb(241, 220, 255);
+	  
 	}
 </style>
 <body>
 	<div>
+		<div class="errMsg">${errMsg}</div>
 		<div>
-			<form>
+			<form action="login" method="post">
 			<!-- placeholder = 아이디, 비밀번호가 입력되어 있게 하고 클릭 시 사라짐 -->
 				<div><input type="text" name="uid" placeholder="아이디"></div>
 				<div><input type="password" name="upw" placeholder="비밀번호"></div>

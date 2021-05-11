@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.koreait.board4.utils.DBUtils;
 
 public class UserDAO {
@@ -46,12 +48,21 @@ public class UserDAO {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, param.getUid());
+			
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
 //				return rs.getString(1).equals(param.getUpw()) ? 1 : 2; << param.getUpw는 내가 친 비번
-				String dbPw = rs.getString("upw"); // db에 저장된 비번
-				if(dbPw.equals(param.getUid())) {
+				String dbPw = rs.getString("upw"); // (암호화 된) db에 저장된 비번
+				
+//				if(dbPw.equals(param.getUpw()))) 	암호화 설정으로 아래로 변경
+				if(BCrypt.checkpw(param.getUpw(), dbPw)) { // 암호화를 불러와서 같은지 비교
+//				("loginSuccess", vo)의 vo를 Servlet 내부가 아닌 메소드 호출로 값을 담을 수 있도록 함
+					int iuser = rs.getInt("iuser");
+					String unm = rs.getString("unm");
+					
+					param.setIuser(iuser);
+					param.setUnm(unm);
 					return 1;
 				} else {
 					return 3;
