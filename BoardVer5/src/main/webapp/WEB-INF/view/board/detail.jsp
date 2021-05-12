@@ -18,8 +18,8 @@
 	<!-- 글 해당 유저가 아니면 삭제/수정이 나타나지 않음 -->
 	<c:if test="${loginUser.iuser == data.iuser}">
 	<div>
-		<a href="/board/del?iboard=${param.iboard}">삭제</a>
-		<a href="/board/mod?iboard=${param.iboard}">수정</a>
+		<a href="del?iboard=${param.iboard}">삭제</a>
+		<a href="mod?iboard=${param.iboard}">수정</a>
 	</div>
 	</c:if>
 </body>

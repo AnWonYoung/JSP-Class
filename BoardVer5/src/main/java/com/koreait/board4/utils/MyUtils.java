@@ -5,6 +5,9 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.koreait.board4.user.UserVO;
 
 
 public class MyUtils {
@@ -27,6 +30,16 @@ public class MyUtils {
 		int intVal = MyUtils.parseStringToInt(val);
 		
 		return intVal;
+	}
+	
+	public static UserVO getLoginUser(HttpServletRequest req) {
+		if(req == null) { return null;}
+		HttpSession hs = req.getSession();
+		return (UserVO) hs.getAttribute("loginUser");
+	}
+	
+	public static int getLoginPK(HttpServletRequest req) {
+		return getLoginUser(req).getIuser();
 	}
 	
 }

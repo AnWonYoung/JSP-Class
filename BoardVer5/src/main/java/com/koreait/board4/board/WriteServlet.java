@@ -30,9 +30,12 @@ public class WriteServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String ctnt = request.getParameter("ctnt");
 		// 글쓴이의 PK값 받아오기 (html로 받아오기 XX 반드시 Session으로만 받아야 함)
-		HttpSession hs = request.getSession();
-		UserVO loginUser = (UserVO) hs.getAttribute("loginUser");
-		int iuser = loginUser.getIuser();
+		
+//		HttpSession hs = request.getSession();
+//		UserVO loginUser = (UserVO) hs.getAttribute("loginUser");
+//		int iuser = loginUser.getIuser();
+		
+		int iuser = MyUtils.getLoginPK(request); // 위 3줄 (로그인 된 사람의 user키 값)
 		
 		BoardVO param = new BoardVO();
 		param.setIuser(iuser);
