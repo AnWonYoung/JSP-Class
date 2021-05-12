@@ -42,7 +42,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 		// iuser 숫자 값이 아니라 unm이 나오도록 join
 		String sql = "select A.iboard, A.title, A.regdt, B.unm from t_board A left "
-				+ "join t_user B on A.iuser = B.iuser";
+					  + "join t_user B on A.iuser = B.iuser order by a.iboard DESC";
 		
 		try {
 			con = DBUtils.getCon();
@@ -72,6 +72,73 @@ public class BoardDAO {
 		}
 		
 		return list;
+	}
+	
+	public static BoardVO selBoard(int iboard) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql ="select A.title, A.regdt, A.ctnt, A.iuser, B.unm from t_board A left "
+				+ "join t_user B on A.iuser = B.iuser where iboard = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, iboard);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				String title = rs.getString("title");
+				String ctnt = rs.getString("ctnt");
+				String regdt = rs.getString("regdt");
+				String unm = rs.getString("unm");
+				int iuser = rs.getInt("iuser");
+				
+				BoardVO vo = new BoardVO();
+				
+				vo.setIboard(iboard);
+				vo.setTitle(title);
+				vo.setCtnt(ctnt);
+				vo.setRegdt(regdt);
+				vo.setUnm(unm);
+				vo.setIuser(iuser);
+				
+				return vo;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+		
+		return null;
+		
+	}
+	
+	public static int delBoard(BoardVO vo) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = " delete from t_board where iboard = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, vo.getIboard());
+			
+			return ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con, ps);
+		}
+		return 0;
+		
 	}
 
 }

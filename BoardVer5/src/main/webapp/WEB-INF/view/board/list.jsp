@@ -43,7 +43,7 @@ table, td, th {
 				<td> 작성자 </td>
 			</tr>
 			<c:forEach items = "${list}" var = "i">
-			 <tr>
+			 <tr onclick="moveToDetail(${i.iboard});">
 				<td> ${i.iboard} </td>
 				<td> ${i.title} </td>
 				<td> ${i.regdt} </td>
@@ -51,6 +51,11 @@ table, td, th {
 			</tr>
 			</c:forEach>
 		</table>
+		<script>
+			function moveToDetail(iboard){
+				location.href = '/board/detail?iboard=' + iboard;
+			}
+		</script>
 	</div>
 </body>
 </html>
