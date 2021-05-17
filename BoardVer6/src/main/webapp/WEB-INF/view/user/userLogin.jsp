@@ -18,7 +18,7 @@
 	</div>
 	
 		<div>
-			<a href="join"><button>회원가입</button></a>
+			<a href="userJoin"><button>회원가입</button></a>
 		</div>
 </body>
 </html>

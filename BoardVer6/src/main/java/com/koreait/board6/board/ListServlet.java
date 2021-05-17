@@ -19,8 +19,8 @@ public class ListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<BoardVO> list = BoardDAO.selBoard();
-		request.setAttribute("list", list);
+//		List<BoardVO> list = BoardDAO.selBoard();
+		request.setAttribute("list", BoardDAO.selBoard());
 		
 		HttpSession hs = request.getSession();
 	

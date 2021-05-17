@@ -6,8 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>리스트</title>
+
+<script defer src="/res/js/boardList.js"></script>
+<link href="/res/css/boardList.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
+	<h1>${loginUser.unm} 반갑습니당</h1>
 	<a href="/user/logout">logout</a>
 	</div>
 	
@@ -25,8 +30,8 @@
 				<td> 등록시간 </td>
 				<td> 작성자 </td>
 			</tr>
-			<c:forEach items = "${list}" var = "i">
-			 <tr onclick="moveToDetail(${i.iboard});">
+			<c:forEach items = "${requestScope.list}" var = "i">
+			 <tr class="record" onclick="moveToDetail(${i.iboard})">
 				<td> ${i.iboard} </td>
 				<td> ${i.title} </td>
 				<td> ${i.regdt} </td>
@@ -34,11 +39,7 @@
 			</tr>
 			</c:forEach>
 		</table>
-		<script>
-			function moveToDetail(iboard){
-				location.href = '/board/detail?iboard=' + iboard;
-			}
-		</script>
+
 	</div>
 </body>
 </html>

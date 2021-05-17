@@ -42,4 +42,8 @@ public class MyUtils {
 		return getLoginUser(req).getIuser();
 	}
 	
+	public static int getLoginUserPK(HttpServletRequest req) {
+		if(req == null) {return 0;}
+		return getLoginUser(req).getIuser();
+	}
 }

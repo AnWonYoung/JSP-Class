@@ -40,9 +40,9 @@ public class BoardDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		// iuser 숫자 값이 아니라 unm이 나오도록 join
+
 		String sql = "select A.iboard, A.title, A.regdt, B.unm from t_board A left "
-					  + "join t_user B on A.iuser = B.iuser order by a.iboard DESC";
+					  + "join t_user B on A.iuser = B.iuser order by A.iboard DESC";
 		
 		try {
 			con = DBUtils.getCon();
@@ -50,7 +50,7 @@ public class BoardDAO {
 			
 			rs = ps.executeQuery();
 			
-			while(rs.next()) {
+			while(rs.next()) {		// 한 줄이 나올 때만 if문
 				BoardVO vo = new BoardVO();
 				int iboard = rs.getInt("iboard");
 				String title = rs.getString("title");
