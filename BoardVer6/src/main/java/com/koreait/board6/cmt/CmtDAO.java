@@ -96,4 +96,29 @@ public class CmtDAO {
 		
 		return 0;
 	}
+	
+	public static int updCmt(CmtVO param) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql = "update t_board_cmt set cmt = ? where icmt = ? and iuser = ? ";
+		
+		try {
+			con = DBUtils.getCon();
+			ps = con.prepareStatement(sql);
+			
+			ps.setString(1, param.getCmt());
+			ps.setInt(2, param.getIcmt());
+			ps.setInt(3, param.getIuser());
+			
+			return ps.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(con, ps);
+		}
+		return 0;
+		
+	}
 }

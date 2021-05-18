@@ -32,7 +32,7 @@ public class WriteServlet extends HttpServlet {
 		String ctnt = request.getParameter("ctnt");
 		
 		
-		int iuser = MyUtils.getLoginPK(request);
+		int iuser = MyUtils.getLoginUserPK(request);
 		
 		BoardVO param = new BoardVO();
 		param.setIuser(iuser);

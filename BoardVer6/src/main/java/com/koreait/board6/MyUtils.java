@@ -38,9 +38,9 @@ public class MyUtils {
 		return (UserVO) hs.getAttribute("loginUser");
 	}
 	
-	public static int getLoginPK(HttpServletRequest req) {
-		return getLoginUser(req).getIuser();
-	}
+//	public static int getLoginPK(HttpServletRequest req) {
+//		return getLoginUser(req).getIuser();
+//	}
 	
 	public static int getLoginUserPK(HttpServletRequest req) {
 		if(req == null) {return 0;}

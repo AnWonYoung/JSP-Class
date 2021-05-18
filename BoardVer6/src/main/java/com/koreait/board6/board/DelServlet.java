@@ -15,7 +15,7 @@ public class DelServlet extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int iboard = MyUtils.getParamInt("iboard", request);
-		int iuser = MyUtils.getLoginPK(request);
+		int iuser = MyUtils.getLoginUserPK(request);
 		
 		BoardVO vo = new BoardVO();
 		vo.setIboard(iboard);

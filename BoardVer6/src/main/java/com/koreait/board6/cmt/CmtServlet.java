@@ -29,17 +29,25 @@ public class CmtServlet extends HttpServlet {
 
 	// 등록과 수정만, get에서 삭제
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int icmt = MyUtils.getParamInt("icmt", request);
 		int iboard = MyUtils.getParamInt("iboard", request);
 		String cmt = request.getParameter("cmt");
 		
-		int iuser = MyUtils.getLoginPK(request); // iuser값은 sesstion에서 가져오기, 해당 메소드를 이미 생성함
+		int iuser = MyUtils.getLoginUserPK(request); // iuser값은 sesstion에서 가져오기, 해당 메소드를 이미 생성함
 		
 		CmtVO param = new CmtVO();
 		param.setIboard(iboard);
 		param.setCmt(cmt);
 		param.setIuser(iuser);
 		
-		CmtDAO.insCmt(param);
+		if (icmt != 0) {
+			param.setIcmt(icmt);
+			CmtDAO.updCmt(param);
+		} else {
+			param.setIboard(iboard); // iboard값 들어가야 함!
+			CmtDAO.insCmt(param); 
+		}
+		
 		
 		response.sendRedirect("detail?iboard=" + iboard);
 	}	
