@@ -74,38 +74,43 @@ public class BoardDAO {
 		return list;
 	}
 	
-	public static BoardVO selBoard(int iboard) {
+	public static BoardVO selBoard(BoardVO param) {
+		BoardVO result = null;
+		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql ="select A.title, A.regdt, A.ctnt, A.iuser, B.unm from t_board A left "
-				+ "join t_user B on A.iuser = B.iuser where iboard = ? ";
+		String sql ="SELECT B.unm, A.iboard, A.title, A.ctnt, A.iuser, A.regdt, "
+				+ "if(C.iboard IS NULL, 0, 1) AS isFav "
+				+ "FROM t_board A "
+				+ "INNER JOIN t_user B "
+				+ "ON A.iuser = B.iuser "
+				
+				+ "LEFT JOIN t_board_fav C "
+				+ "ON A.iboard = C.iboard "
+				+ "AND C.iuser = ? "
+				+ "WHERE A.iboard = ? ";
 		
 		try {
 			con = DBUtils.getCon();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, iboard);
+			ps.setInt(1, param.getIuser()); // 로그인 user PK
+			ps.setInt(2, param.getIboard());
 			
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				String title = rs.getString("title");
-				String ctnt = rs.getString("ctnt");
-				String regdt = rs.getString("regdt");
-				String unm = rs.getString("unm");
-				int iuser = rs.getInt("iuser");
+				result = new BoardVO();
 				
-				BoardVO vo = new BoardVO();
-				
-				vo.setIboard(iboard);
-				vo.setTitle(title);
-				vo.setCtnt(ctnt);
-				vo.setRegdt(regdt);
-				vo.setUnm(unm);
-				vo.setIuser(iuser);
-				
-				return vo;
+				result.setIboard(rs.getInt("iboard"));
+				result.setTitle(rs.getString("title"));
+				result.setCtnt(rs.getString("ctnt"));
+				result.setRegdt(rs.getString("regdt"));
+				result.setIuser(rs.getInt("iuser"));
+				result.setUnm(rs.getString("unm"));
+				result.setIsFav(rs.getInt("isFav"));
+			
 			}
 			
 		} catch (Exception e) {
@@ -114,7 +119,7 @@ public class BoardDAO {
 			DBUtils.close(con, ps, rs);
 		}
 		
-		return null;
+		return result;
 		
 	}
 	

@@ -1,6 +1,7 @@
 package com.koreait.board6.board;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,9 +20,15 @@ public class DetailServlet extends HttpServlet {
 		
 		int iboard = MyUtils.getParamInt("iboard", request);
 		BoardVO param = new BoardVO();
+		
+		int iuser = MyUtils.getLoginUserPK(request); // 세션에 박힌 iuser값을 가져오기
+		
 		param.setIboard(iboard);
-		request.setAttribute("data", BoardDAO.selBoard(iboard)); // 글의 정보
+		param.setIuser(iuser); // 여기서 로그인 된 iuser set (글쓴이의 iuser X)
+		
+		request.setAttribute("data", BoardDAO.selBoard(param)); // 글의 정보
 		request.setAttribute("cmtList", CmtDAO.selCmtList(iboard)); // 댓글 리스트 정보
+		
 		
 		MyUtils.openJSP("board/detail", request, response);
 	}

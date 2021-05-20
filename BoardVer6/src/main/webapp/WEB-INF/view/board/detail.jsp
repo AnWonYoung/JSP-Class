@@ -9,11 +9,27 @@
 <title>${data.title}</title>
 <style>
 	.hidden { display: none; }
+	.fa-heart {color: violet; }
 </style>
 <script defer src="/res/js/boardDetail.js?ver=5"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+	.hidden { display: none; }
+	.fa-heart { color: red; }
+</style>
 </head>
 <body>
-	<div> 제목 : ${data.title}</div>
+	<div> 제목 : ${data.title}
+	
+	<c:if test="${data.isFav == 0}">
+		<a href="fav?iboard=${param.iboard}&fav=1"><i class="far fa-heart"></i></a>
+	</c:if>
+	
+	<c:if test="${data.isFav == 1}">
+		<a href="fav?iboard=${param.iboard}&fav=0"><i class="fas fa-heart"></i></a>
+	</c:if>
+	
+	</div>
 	<div> 등록일 : ${data.regdt}</div>
 	<div> 글쓴이 : ${data.unm }</div>
 	<div>

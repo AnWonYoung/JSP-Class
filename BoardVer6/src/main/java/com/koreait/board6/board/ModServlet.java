@@ -1,6 +1,7 @@
 package com.koreait.board6.board;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ public class ModServlet extends HttpServlet {
 		int iboard = MyUtils.getParamInt("iboard", request);
 		
 		
-		BoardVO data = BoardDAO.selBoard(iboard);
-		request.setAttribute("data", data);
+//		BoardVO data = BoardDAO.selBoard();
+//		request.setAttribute("data", data);
 		
 		MyUtils.openJSP("board/mod", request, response);
 	}
