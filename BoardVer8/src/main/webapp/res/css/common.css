@@ -19,3 +19,7 @@ header nav ul {
 header nav ul li{
 	margin-left: 100px;
 }
+
+section {padding-left: 40px; padding-right: 40px;}
+
+.colorRed {color: red; }

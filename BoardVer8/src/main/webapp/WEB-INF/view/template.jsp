@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/res/css/common.css">
+<script defer src="/res/js/common.js"></script>
 <title>${requestScope.title}</title>
 </head>
 <body>
