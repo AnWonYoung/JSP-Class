@@ -15,8 +15,6 @@ import com.koreait.board8.MyUtils;
 @WebServlet("/board/cmtInsSel")
 public class BoardCmtInsSelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	
 	
 	
 	// 댓글 리스트 날리기
@@ -33,12 +31,12 @@ public class BoardCmtInsSelServlet extends HttpServlet {
 		String json = gson.toJson(list);
 		System.out.println("json : " + json);
 		
+		response.setCharacterEncoding("UTF-8");
 		response.getWriter()
 		.append(json);
 	}
 	
-	
-	
+
 	
 	// 댓글 등록하기
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,11 +53,20 @@ public class BoardCmtInsSelServlet extends HttpServlet {
 //		json형태로 보내주기 {"result": result} 형태
 		int result = BoardCmtDAO.insCmt(param);
 		
+//		Gson gson = new Gson();
+//		String json = gson.toJson(result);
+//		System.out.println("json : " + json);
+		
+//		response.getWriter().append(json);
+		
+		
 		response.getWriter()
 		.append("{")
 		.append("\"result\":")
 		.append(String.valueOf(result))
 		.append("}");
+		
+//		System.out.println("result : " + result);
 
 	}
 

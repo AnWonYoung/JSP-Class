@@ -22,6 +22,7 @@ import com.koreait.board8.DBUtils;
 			try {
 				con = DBUtils.getCon();
 				ps = con.prepareStatement(sql);
+				
 				ps.setInt(1, param.getIboard());
 				ps.setInt(2, param.getIuser());
 				ps.setString(3, param.getCmt());
@@ -47,7 +48,8 @@ import com.koreait.board8.DBUtils;
 						+ " FROM t_board_cmt A "
 						+ " INNER JOIN t_user B "
 						+ " ON A.iuser = B.iuser "
-						+ " WHERE A.iboard = ? ";
+						+ " WHERE A.iboard = ? "
+						+ " ORDER BY A.icmt ";
 			
 			try {
 				con = DBUtils.getCon();
@@ -72,5 +74,28 @@ import com.koreait.board8.DBUtils;
 				DBUtils.close(con, ps, rs);
 			}
 			return list;
+		}
+		
+		public static int delBoardCmt(BoardCmtEntity param) {
+			Connection con = null;
+			PreparedStatement ps = null;
+			
+			String sql = "DELETE FROM t_board_cmt WHERE icmt = ? and iuser = ?";
+			
+			try {
+				con = DBUtils.getCon();
+				ps = con.prepareStatement(sql);
+				
+				ps.setInt(1, param.getIcmt());
+				ps.setInt(2, param.getIuser());
+				
+				return ps.executeUpdate();
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				DBUtils.close(con, ps);
+			}
+			return 0;
 		}
 	}

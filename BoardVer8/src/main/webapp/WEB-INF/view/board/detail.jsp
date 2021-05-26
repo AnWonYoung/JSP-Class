@@ -13,11 +13,17 @@
 
 <!-- 댓글 기능 -->
 
+<!-- 여기서 form태그는 날리는 목적 X 접근성의 목적O -->
+<!-- data-''  =  js에서 dataset 뒤의 값으로 사용-->
+<c:if test="${not empty sessionScope.loginUser}">
 <div>
-	<form id="cmtFrm" data-iboard="${param.iboard}">
+	<form id="cmtFrm" onsubmit="return false;">
 		<input type="text" id="cmt">
 		<input type="button" value="댓글달기" onclick="regCmt();">
 	</form>
 </div>
+</c:if>
+
+<div id="cmtList" data-login_user_pk="${sessionScope.loginUser.iuser}" data-iboard="${param.iboard}"></div>
 
 <script src="/res/js/boarddetail.js"></script>
