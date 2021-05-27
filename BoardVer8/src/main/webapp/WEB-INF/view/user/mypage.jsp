@@ -10,7 +10,7 @@
 			<c:set var="img" value="/res/img/noprofile.jpg"/>
 		</c:when>
 		<c:otherwise>
-			<c:set var="img" value="${sessionSope.loginUser.profileImg}"/>
+			<c:set var="img" value="/res/img/user/${sessionScope.loginUser.profileImg}"/>
 		</c:otherwise>
 	</c:choose>
 	<!-- accept로 이미지 파일 확장자만 업로드할 수 있도록 설정 / name 값도 중요하니 생각하고 넣기 -->
