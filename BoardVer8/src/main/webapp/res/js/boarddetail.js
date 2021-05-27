@@ -1,6 +1,8 @@
 var cmtFrmElem = document.querySelector('#cmtFrm');
 var cmtListElem = document.querySelector('#cmtList');
 
+var cmtModModalElem = document.querySelector('#modal');
+
 function regCmt() {
 	var cmtVal = cmtFrmElem.cmt.value;
 //  console.log('cmtVal : ' + cmtVal);
@@ -102,9 +104,16 @@ function makeCmtElemList(data) {
 			var modBtn = document.createElement('button');
 			
 //			삭제=ajax로 날릴 것, 안에 적지 않고 따로 함수를 생성 해 안에서 호출만 해두기 
+//			confirm = boolean값으로 취소 flase, 확인은 true
 			delBtn.addEventListener('click', function() {
-				delAjax(item.icmt);
-			})
+				if(confirm('삭제하시겠습니까?')) {
+					delAjax(item.icmt);
+					}
+				});
+//			댓글 수정 모달창 띄우기				
+			modBtn.addEventListener('click', function() {
+				openModModal(item);
+			});
 			
 			delBtn.innerText = '삭제';
 			modBtn.innerText = '수정';
@@ -140,5 +149,41 @@ function delAjax(icmt) {
 	});
 }
 
+// 모달창을 열기 위해서 class에 빈칸을 줌
+function openModModal({icmt, cmt}) {
+	var cmtModFrmElem = document.querySelector('#cmtModFrm');
+	cmtModModalElem.className = '';
+	
 
+	cmtModFrmElem.icmt.value = icmt;
+	cmtModFrmElem.cmt.value = cmt;
+}
+// 모달창 닫기 displayNone
+function closeModModal() {
+	cmtModModalElem.className = 'displayNone';
+}
+
+function modAjax() {
+	var cmtModFrmElem = document.querySelector('#cmtModFrm');
+	var param = {
+		icmt: cmtModFrmElem.icmt.value,
+		cmt: cmtModFrmElem.cmt.value
+	}
+	
+	const init = {
+		method: 'POST',
+		body: new URLSearchParams(param)
+	};
+	
+	fetch('cmtDelUpd', init)
+	.then(function(res) {
+		return res.json();
+	})
+	.then(function(myJson) {
+		closeModModal()
+		console.log(myJson);
+		getListAjax();
+	}) 
+		
+}
 getListAjax(); // 해당 파일이 import되자마자 함수를 1회 호출하는 것
