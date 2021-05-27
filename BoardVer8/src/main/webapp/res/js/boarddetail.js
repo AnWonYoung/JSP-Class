@@ -180,7 +180,7 @@ function modAjax() {
 		return res.json();
 	})
 	.then(function(myJson) {
-		closeModModal()
+		closeModModal();
 		console.log(myJson);
 		getListAjax();
 	}) 
