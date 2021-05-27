@@ -21,7 +21,7 @@
 				<c:if test="${not empty sessionScope.loginUser}">
 					<li><a href="/user/logout">로그아웃</a></li>
 					<li><a href="/board/write">글쓰기</a></li>
-					<li><a href="/board/favList">좋아요</a></li>
+					<li><a href="/user/mypage">마이페이지</a>
 				</c:if>
 				
 					<li><a href="/board/list">리스트</a></li>
