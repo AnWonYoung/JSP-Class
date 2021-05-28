@@ -7,7 +7,7 @@
 <form id="frm" action="join" method="post" onsubmit="return frmChk();">
 	<div>
 		<input type="text" name="uid" placeholder="아이디">
-		<input type="button" id="btnChkId" value="중복ID체크">
+		<input type="button" name="btnChkId" value="중복ID체크">
 		<!--  id or name 값을 준 다음에 js로 접근하기 / 이벤트는 js에서 처리  -->
 	</div>
 	<div id="chkUidResult"></div>

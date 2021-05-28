@@ -27,7 +27,7 @@ function idChkAjax(uid) {
 	// 창이 아니라 아래에 나타남
 	
 	// fetch는 미설정 시 해당 주소 get방식으로 날아감
-	fetch('/user/idChk?uid=' + uid)
+	fetch('uidChk?uid=' + uid)
 	.then(function(res) {
 		return res.json();
 	})

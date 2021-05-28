@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/res/css/common.css">
-<script defer src="/res/js/common.js"></script>
 <title>${requestScope.title}</title>
 </head>
 <body>
@@ -35,4 +34,5 @@
   <!-- section =/ div (section이 조금 더 의미를 가짐) -->
 </body>
 <script src="/res/js/userjoin.js"></script>
+<script defer src="/res/js/common.js"></script>
 </html>
